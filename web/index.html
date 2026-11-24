@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>skybag</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <span class="brand">skybag</span>
+  <nav id="tabs">
+    <button data-tab="plan" class="on">Flight plan</button>
+    <button data-tab="map">Map</button>
+    <button data-tab="perf">Performance</button>
+    <button data-tab="wb">Weight &amp; balance</button>
+    <button data-tab="notams">NOTAMs</button>
+  </nav>
+  <span class="clock">demo clock <input id="clock" value="2611241200" size="10" title="UTC, YYMMDDhhmm"></span>
+  <span class="warn">simulation only, not for navigation</span>
+</header>
+
+<main>
+<section id="plan" class="tab on">
+  <form id="plan-form" class="row">
+    <label>Route <input name="route" value="KJFK EGLL" size="34"></label>
+    <label>FL <input name="fl" value="350" size="4"></label>
+    <label>Mach <input name="mach" value="0.78" size="4"></label>
+    <label>ZFW kg <input name="zfw" value="56000" size="6"></label>
+    <label>Alternate kg <input name="alt_fuel" value="0" size="5"></label>
+    <label>Wind seed <input name="wind_seed" value="1" size="3"></label>
+    <button>Plan</button>
+  </form>
+  <div id="plan-summary" class="summary"></div>
+  <canvas id="profile" width="1100" height="220"></canvas>
+  <div class="scroll"><table id="legs"></table></div>
+</section>
+
+<section id="map" class="tab">
+  <div class="row">
+    <button id="play">Play</button>
+    <label>Speed <select id="speed"><option>30</option><option selected>120</option><option>600</option></select>x</label>
+    <span id="ownship" class="mono"></span>
+  </div>
+  <div class="split">
+    <canvas id="chart" width="900" height="560"></canvas>
+    <div class="side">
+      <img id="view" alt="synthetic view from the ownship" width="400" height="225">
+      <div class="small">Synthetic terrain view from terra, the software renderer. Updates every few seconds.</div>
+    </div>
+  </div>
+</section>
+
+<section id="perf" class="tab">
+  <form id="perf-form" class="row">
+    <label>Airport <input name="apt" value="KSFO" size="6"></label>
+    <label>Runway <select name="rwy"></select></label>
+    <label>Mass kg <input name="mass" value="72000" size="6"></label>
+    <label>OAT C <input name="oat" value="15" size="3"></label>
+    <label>QNH <input name="qnh" value="1013" size="5"></label>
+    <label>Wind <input name="wind_dir" value="280" size="3">/<input name="wind_kt" value="10" size="3"></label>
+    <label><input type="checkbox" name="wet"> wet</label>
+    <button data-kind="takeoff">Take-off</button>
+    <button data-kind="landing">Landing</button>
+  </form>
+  <div id="runway-list" class="small"></div>
+  <div id="perf-out" class="summary"></div>
+</section>
+
+<section id="wb" class="tab">
+  <form id="wb-form" class="row">
+    <label>Pax fwd <input name="pax_fwd" value="40" size="3"></label>
+    <label>mid <input name="pax_mid" value="45" size="3"></label>
+    <label>aft <input name="pax_aft" value="40" size="3"></label>
+    <label>Cargo fwd kg <input name="cargo_fwd" value="1500" size="5"></label>
+    <label>aft kg <input name="cargo_aft" value="1800" size="5"></label>
+    <label>Block kg <input name="block" value="9000" size="5"></label>
+    <label>Trip kg <input name="trip" value="6000" size="5"></label>
+    <button>Check</button>
+  </form>
+  <div class="split">
+    <canvas id="envelope" width="640" height="420"></canvas>
+    <div id="wb-out" class="summary"></div>
+  </div>
+</section>
+
+<section id="notams" class="tab">
+  <form id="notam-form" class="row">
+    <label>Airport <input name="apt" value="" size="6" placeholder="all"></label>
+    <button>Show</button>
+  </form>
+  <div id="notam-list"></div>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
