@@ -90,7 +90,8 @@ These are the measured weaknesses. They are the roadmap.
 3. **Vincenty doesn't converge for nearly antipodal points.** 77% of pairs within half a degree of antipodal fail. The planner refuses such a leg. Karney's algorithm (GeographicLib is vendored only as a checker) is the fix.
 4. **The synthetic view is slow.** One 400x225 frame at FL160 over New England takes about 10 s (`skybag --bench`). Every terrain sample does a geodesic nearest-airport query for the flattening, and terra rebuilds every tile every frame.
 5. **The tests don't catch everything.** `tools/mutants.py` plants 15 bugs and 12 are caught. Three survive: an accelerate-stop without the reaction time, terrain flattened only at the airport reference point, and an unfactored tailwind.
-6. **The moving map is equirectangular around the route.** It is fine for one flight, but it is not a real chart projection, and the airports drawn are only those within 500 nm of the route midpoint.
+6. **There is no globe yet.** The plan is a Google Earth style 3D globe in the browser with every airport, runways up close, NOTAM closures, the route in 3D and the ownship, drawn with WebGL on terra's tiles (osgEarth can't run offline without a GPU). The spec and what already exists are in [docs/globe.md](docs/globe.md).
+7. **The moving map is equirectangular around the route.** It is fine for one flight, but it is not a real chart projection, and the airports drawn are only those within 500 nm of the route midpoint.
 
 ## terra
 
