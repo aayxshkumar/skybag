@@ -80,7 +80,7 @@ std::string format_notam_time(std::int64_t minutes) {
   const int d = doy - (153 * mp + 2) / 5 + 1;
   const int m = mp + (mp < 10 ? 3 : -9);
   y += m <= 2;
-  char buf[16];
+  char buf[64];
   std::snprintf(buf, sizeof buf, "%02d%02d%02d%02d%02d", y % 100, m, d, rem / 60, rem % 60);
   return buf;
 }

@@ -466,7 +466,7 @@ bool parse_route(const NavDb& db, const std::string& text, std::vector<Waypoint>
         *error = "bad coordinate " + t;
         return false;
       }
-      char name[32];
+      char name[64];
       std::snprintf(name, sizeof name, "%c%05.2f%c%06.2f", lat >= 0 ? 'N' : 'S', std::abs(lat), lon >= 0 ? 'E' : 'W',
                     std::abs(lon));
       out->push_back({name, {lat, wrap180(lon)}});
